@@ -28,6 +28,9 @@
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx", ".js"] }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "import/extensions": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
