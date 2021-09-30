@@ -6,9 +6,10 @@ export const fetchCharacters = async (limit = 10, offset = 0) => {
   const {
     data: {
       attributionHTML,
+      attributionText,
       data: { results },
     },
   }: AxiosResponse<FetchCharactersResponse> = await fetch('/characters', { params: { limit, offset } })
 
-  return { attributionHTML, characters: results }
+  return { attributionHTML, attributionText, characters: results }
 }

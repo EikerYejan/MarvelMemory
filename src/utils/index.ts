@@ -1,6 +1,7 @@
+import { DefaultTheme, StyledProps } from 'styled-components'
 import { Card, Character } from '../types'
 
-export const shuffleArray = <T extends Array<any>>(array: T) => {
+export const shuffleArray = <T extends Array<unknown>>(array: T) => {
   const shuffled = array
 
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -14,7 +15,7 @@ export const shuffleArray = <T extends Array<any>>(array: T) => {
   return shuffled
 }
 
-export const replicateArray = <T extends Array<any>>(arr: T, times = 2) => {
+export const replicateArray = <T extends Array<unknown>>(arr: T, times = 2) => {
   const arrays = Array(times).fill(0)
   const replicated = arrays.map(() => arr)
 
@@ -29,4 +30,10 @@ export const transformCharacters = (characters: Character[]): Card[] => {
     name,
     image: `${thumbnail.path}/standard_xlarge.${thumbnail.extension}`,
   }))
+}
+
+export const themeColor = (color: keyof DefaultTheme['colors']) => {
+  return ({ theme }: StyledProps<DefaultTheme>) => {
+    return theme.colors?.[color]
+  }
 }

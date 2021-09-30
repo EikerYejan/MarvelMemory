@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components'
 
 const theme: DefaultTheme = {
-  borderRadius: '4px',
+  borderRadius: '8px',
   colors: {
     black: '#000',
     dark: '#151515',

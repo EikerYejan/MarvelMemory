@@ -8,7 +8,7 @@ import theme from './theme/defaultTheme'
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App cardsCount={10} />
+      <App />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root'),
