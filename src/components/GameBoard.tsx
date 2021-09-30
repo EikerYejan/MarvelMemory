@@ -158,6 +158,7 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
         copyrightText.current = attributionText
         setCards(processedResults)
       } catch (error) {
+        // eslint-disable-next-line
         alert('error')
       } finally {
         setIsLoading(false)
