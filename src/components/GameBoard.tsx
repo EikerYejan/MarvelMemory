@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Fireworks } from 'fireworks-js/dist/react'
 import Card from './Card'
 import { replicateArray, shuffleArray, transformCharacters } from '../utils'
 import { fetchCharacters } from '../services/api'
 import { Card as CardType } from '../types'
+import ErrorIndicator from './Error'
 
 type Props = {
   cardsCount: number
@@ -124,6 +125,7 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
   const [selectedCards, setSelectedCards] = useState<CardType[]>([])
   const [matchedCards, setMatchedCards] = useState<CardType[]>()
   const [isCompleted, setIsCompleted] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const [level, setLevel] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
@@ -138,33 +140,33 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
     if (selectedCardsCount <= 1 && !selectedIds.includes(card.id)) setSelectedCards((prev) => [...(prev ?? []), card])
   }
 
-  const getPageSettings = () => {
+  const pageSettings = useMemo(() => {
     const pageSize = cardsCount / 2
     const skip = pageSize * level
 
     return [pageSize, skip]
+  }, [cardsCount, level])
+
+  const fetchData = async () => {
+    try {
+      setSelectedCards([])
+      setMatchedCards(undefined)
+      setHasError(false)
+      setIsLoading(true)
+
+      const { characters, attributionText } = await fetchCharacters(...pageSettings)
+      const processedResults = transformCharacters(replicateArray(characters))
+
+      copyrightText.current = attributionText
+      setCards(processedResults)
+    } catch (error) {
+      setHasError(true)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setSelectedCards([])
-        setMatchedCards(undefined)
-        setIsLoading(true)
-
-        const { characters, attributionText } = await fetchCharacters(...getPageSettings())
-        const processedResults = transformCharacters(replicateArray(characters))
-
-        copyrightText.current = attributionText
-        setCards(processedResults)
-      } catch (error) {
-        // eslint-disable-next-line
-        alert('error')
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
     fetchData()
   }, [cardsCount, level])
 
@@ -204,46 +206,47 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
     }
   }
 
-  return (
-    <Wrapper className="GameBoard">
-      {isLoading ? (
-        <span className="loader" />
-      ) : (
-        <div>
-          {isCompleted && (
-            <div className="fireworks">
-              <Fireworks options={{ particles: 100 }} />
-            </div>
-          )}
-          <Controls>
-            <p className="cards-count">{cards.length - (matchedCards?.length ?? 0)} cards remainig</p>
-            <p className="current-level">Level {level}</p>
-            <div className="buttons">
-              <button className="reset-button" onClick={onReset} type="button" title="Reset">
-                <img src="images/refresh.svg" alt="refresh" />
-              </button>
-            </div>
-          </Controls>
-          <div className="grid">
-            {cards.map((card) => (
-              <Card
-                isMatched={matchedIds?.includes(card.id)}
-                isSelected={selectedIds?.includes(card.id)}
-                onClick={() => onSelect(card)}
-                key={card.id}
-                {...card}
-              />
-            ))}
+  const renderContent = () => {
+    if (isLoading && !hasError) return <span className="loader" />
+    if (hasError) return <ErrorIndicator onRetry={fetchData} />
+
+    return (
+      <section>
+        {isCompleted && (
+          <div className="fireworks">
+            <Fireworks options={{ particles: 100 }} />
           </div>
-          <footer>
-            <a title="Marvel website" href="https://marvel.com" target="_blank" rel="noopener noreferrer">
-              {copyrightText.current}
-            </a>
-          </footer>
+        )}
+        <Controls>
+          <p className="cards-count">{cards.length - (matchedCards?.length ?? 0)} cards remainig</p>
+          <p className="current-level">Level {level}</p>
+          <div className="buttons">
+            <button className="reset-button" onClick={onReset} type="button" title="Reset">
+              <img src="images/refresh.svg" alt="refresh" />
+            </button>
+          </div>
+        </Controls>
+        <div className="grid">
+          {cards.map((card) => (
+            <Card
+              isMatched={matchedIds?.includes(card.id)}
+              isSelected={selectedIds?.includes(card.id)}
+              onClick={() => onSelect(card)}
+              key={card.id}
+              {...card}
+            />
+          ))}
         </div>
-      )}
-    </Wrapper>
-  )
+        <footer>
+          <a title="Marvel website" href="https://marvel.com" target="_blank" rel="noopener noreferrer">
+            {copyrightText.current}
+          </a>
+        </footer>
+      </section>
+    )
+  }
+
+  return <Wrapper className="GameBoard">{renderContent()}</Wrapper>
 }
 
 export default GameBoard
