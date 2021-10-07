@@ -6,9 +6,11 @@ import { replicateArray, shuffleArray, transformCharacters } from '../utils'
 import { fetchCharacters } from '../services/api'
 import { Card as CardType } from '../types'
 import ErrorIndicator from './Error'
+import Alert from './Alert'
 
 type Props = {
   cardsCount: number
+  onChangeCardsCount: (count: number) => void
 }
 
 const spin = keyframes`
@@ -34,10 +36,10 @@ const Wrapper = styled.div`
   padding: 70px 45px;
 
   .fireworks {
-    position: absolute;
+    position: fixed;
     z-index: 1;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
 
@@ -82,10 +84,11 @@ const Wrapper = styled.div`
 `
 
 const Controls = styled.div`
-  margin: 0 0 45px 0;
+  margin: 0 auto 45px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  padding: 0 50px;
 
   .buttons {
     display: flex;
@@ -94,7 +97,8 @@ const Controls = styled.div`
     margin-top: 15px;
   }
 
-  .reset-button {
+  .reset-button,
+  .change-cards-count-button {
     background: none;
     border: none;
     padding: 0;
@@ -109,10 +113,15 @@ const Controls = styled.div`
       height: 25px;
       display: block;
     }
+
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
-  .cards-count {
-    margin-right: 15px;
+  .change-cards-count-button {
+    margin-right: 10px;
   }
 `
 
@@ -120,11 +129,11 @@ const verifyCards = ([card1, card2]: CardType[]) => {
   return card1.name === card2.name
 }
 
-const GameBoard = ({ cardsCount = 20 }: Props) => {
+const GameBoard = ({ cardsCount = 20, onChangeCardsCount }: Props) => {
   const [cards, setCards] = useState<CardType[]>([])
   const [selectedCards, setSelectedCards] = useState<CardType[]>([])
   const [matchedCards, setMatchedCards] = useState<CardType[]>()
-  const [isCompleted, setIsCompleted] = useState(false)
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const [hasError, setHasError] = useState(false)
 
   const [level, setLevel] = useState(1)
@@ -184,9 +193,7 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
 
   useEffect(() => {
     if (typeof matchedCards === `object` && matchedCards.length === cards.length) {
-      setIsCompleted(true)
-
-      setTimeout(onFinishLevel, 3500)
+      setTimeout(setShowConfirmationModal, 500, true)
     }
   }, [matchedCards, cards])
 
@@ -197,13 +204,8 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
   }
 
   const onFinishLevel = () => {
-    // eslint-disable-next-line
-    const moveToNextLevel = confirm('Go to the next level?')
-
-    if (moveToNextLevel) {
-      setLevel((prev) => (prev ?? 0) + 1)
-      setIsCompleted(false)
-    }
+    setLevel((prev) => (prev ?? 0) + 1)
+    setShowConfirmationModal(false)
   }
 
   const renderContent = () => {
@@ -212,8 +214,16 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
 
     return (
       <section>
-        {isCompleted && (
+        {showConfirmationModal && (
           <div className="fireworks">
+            <Alert
+              title="Congrats, You won!"
+              subtitle="Do you want to move to the next level?"
+              cancelButtonText="Nope"
+              confirmButtonText="Hell yeah!"
+              onCancel={() => setShowConfirmationModal(false)}
+              onConfirm={onFinishLevel}
+            />
             <Fireworks options={{ particles: 100 }} />
           </div>
         )}
@@ -221,7 +231,21 @@ const GameBoard = ({ cardsCount = 20 }: Props) => {
           <p className="cards-count">{cards.length - (matchedCards?.length ?? 0)} cards remainig</p>
           <p className="current-level">Level {level}</p>
           <div className="buttons">
-            <button className="reset-button" onClick={onReset} type="button" title="Reset">
+            <button
+              className="change-cards-count-button"
+              onClick={() => onChangeCardsCount(0)}
+              type="button"
+              title="Change cards count"
+            >
+              <img src="images/dice.svg" alt="refresh" />
+            </button>
+            <button
+              disabled={!matchedCards?.length}
+              className="reset-button"
+              onClick={onReset}
+              type="button"
+              title="Reset"
+            >
               <img src="images/refresh.svg" alt="refresh" />
             </button>
           </div>

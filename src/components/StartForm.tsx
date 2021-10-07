@@ -77,7 +77,6 @@ const StartForm = ({ onConfirm }: Props) => {
           type="number"
           title="Cards count"
           placeholder="Even numbers only"
-          value={value}
         />
         <button
           onClick={() => onConfirm(value)}

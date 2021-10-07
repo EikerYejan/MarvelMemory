@@ -34,7 +34,11 @@ const App = () => {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
       </Helmet>
       <GlobalStyles />
-      {typeof cardsCount === `number` ? <Board cardsCount={cardsCount} /> : <StartForm onConfirm={setCardsCount} />}
+      {typeof cardsCount === `number` && cardsCount > 0 ? (
+        <Board cardsCount={cardsCount} onChangeCardsCount={setCardsCount} />
+      ) : (
+        <StartForm onConfirm={setCardsCount} />
+      )}
     </Layout>
   )
 }
