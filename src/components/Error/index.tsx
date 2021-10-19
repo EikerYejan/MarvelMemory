@@ -41,7 +41,7 @@ type Props = {
 
 const ErrorIndicator = ({ onRetry }: Props) => {
   return (
-    <Wrapper>
+    <Wrapper data-testid="error">
       <h3>Upps!</h3>
       <img src="images/error.webp" alt="error" />
       <p>There&apos;s been and error.</p>

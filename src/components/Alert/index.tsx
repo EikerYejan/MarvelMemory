@@ -80,7 +80,7 @@ const Wrapper = styled.div`
 
 const Alert = ({ title, subtitle, confirmButtonText, cancelButtonText, onCancel, onConfirm, ...props }: Props) => {
   return (
-    <Wrapper {...props}>
+    <Wrapper data-testid="alert" {...props}>
       <button onClick={onCancel} className="close" type="button" title="Close">
         &times;
       </button>
