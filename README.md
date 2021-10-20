@@ -1,3 +1,5 @@
+[![Coverage](https://codecov.io/gh/EikerYejan/MarvelMemory/branch/master/graph/badge.svg?token=D9US763PEL)](https://codecov.io/gh/EikerYejan/MarvelMemory)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
