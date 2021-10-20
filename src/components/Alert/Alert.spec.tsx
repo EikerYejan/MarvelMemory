@@ -3,8 +3,8 @@ import { screen } from '@testing-library/react'
 import Alert from '.'
 import { renderWithTheme } from '../../utils/tests'
 
-const onClose = jest.fn(() => null)
-const onConfirm = jest.fn(() => null)
+const onClose = jest.fn()
+const onConfirm = jest.fn()
 
 const title = 'Alert Title'
 const subtitle = 'Alert Subtitle'

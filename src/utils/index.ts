@@ -22,7 +22,7 @@ export const replicateArray = <T extends Array<unknown>>(arr: T, times = 2) => {
   return replicated.flat()
 }
 
-export const uuid = () => ((1 + Math.random()) * 0x10000 ?? 0).toString(16).substring(1)
+export const uuid = () => ((1 + Math.random()) * 0x10000).toString(16).substring(1)
 
 export const transformCharacters = (characters: Character[]): Card[] => {
   return characters.map(({ name, thumbnail }) => ({

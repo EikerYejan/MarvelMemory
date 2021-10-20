@@ -2,7 +2,7 @@ import { replicateArray, themeColor, uuid, transformCharacters, shuffleArray } f
 import theme from '../theme/defaultTheme'
 import { Card, Character } from '../types'
 
-const array = [1, 2, 3, 4, 5, 6]
+const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 const characters: Character[] = [
   {
     id: '1',
@@ -61,8 +61,8 @@ describe('Utils', () => {
   })
 
   it('Should shuffle array', () => {
-    const original = [...array]
-    const shuffled = shuffleArray(array)
+    const original = [...array, ...array]
+    const shuffled = shuffleArray([...array, ...array])
 
     expect(shuffled[0] !== original[0]).toBeTruthy()
   })

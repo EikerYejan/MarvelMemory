@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react'
 import { renderWithTheme } from '../../utils/tests'
 import Error from '.'
 
-const onRetry = jest.fn(() => null)
+const onRetry = jest.fn()
 
 describe('<Error />', () => {
   it('Should render Error component', () => {

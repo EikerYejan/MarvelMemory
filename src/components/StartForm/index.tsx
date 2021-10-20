@@ -67,7 +67,7 @@ const StartForm = ({ onConfirm }: Props) => {
   const [value, setValue] = useState(0)
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="start-form">
       <h2>How many cards do you want to use?</h2>
       <div className="controls">
         <input

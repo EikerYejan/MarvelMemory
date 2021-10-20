@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Fireworks } from 'fireworks-js/dist/react'
-import Card from './Card'
-import { replicateArray, shuffleArray, transformCharacters } from '../utils'
-import { fetchCharacters } from '../services/api'
-import { Card as CardType } from '../types'
-import ErrorIndicator from './Error'
-import Alert from './Alert'
+import Card from '../Card'
+import { replicateArray, shuffleArray, transformCharacters } from '../../utils'
+import { fetchCharacters } from '../../services/api'
+import { Card as CardType } from '../../types'
+import ErrorIndicator from '../Error'
+import Alert from '../Alert'
 
 type Props = {
   cardsCount: number

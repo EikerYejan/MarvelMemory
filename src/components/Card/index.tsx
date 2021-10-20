@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card as CardType } from '../types'
+import { Card as CardType } from '../../types'
 
 type Props = React.HTMLAttributes<HTMLDivElement> & CardType
 
@@ -86,7 +86,14 @@ const Wrapper = styled.div<{ isSelected?: CardType['isSelected']; isMatched?: Ca
 
 const Card = ({ name, onClick, isSelected, isMatched, image }: Props) => {
   return (
-    <Wrapper isMatched={isMatched} isSelected={isSelected || isMatched} tabIndex={0} onClick={onClick} role="button">
+    <Wrapper
+      data-testid="card"
+      isMatched={isMatched}
+      isSelected={isSelected || isMatched}
+      tabIndex={0}
+      onClick={onClick}
+      role="button"
+    >
       <div className="inner">
         <div className="front">
           <img alt="marvel-logo" src="https://i.pinimg.com/originals/24/92/00/249200c431fe811110761709b303fcaf.jpg" />
