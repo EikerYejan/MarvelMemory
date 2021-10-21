@@ -29,13 +29,14 @@ describe('<Alert />', () => {
     const cancelButton = element.querySelector<HTMLButtonElement>('button.cancel')
 
     expect(element).toBeInTheDocument()
-    expect(confirmButton).toBeInTheDocument()
-    expect(cancelButton).toBeInTheDocument()
-
+    expect(element).toMatchSnapshot()
     expect(element).toHaveTextContent(title)
     expect(element).toHaveTextContent(subtitle)
     expect(element).toHaveTextContent(cancelButtonText)
     expect(element).toHaveTextContent(confirmButtonText)
+
+    expect(confirmButton).toBeInTheDocument()
+    expect(cancelButton).toBeInTheDocument()
 
     // Action buttons
     confirmButton?.click()

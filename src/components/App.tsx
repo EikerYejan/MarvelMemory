@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import styled, { createGlobalStyle } from 'styled-components'
 import Board from './GameBoard'
@@ -24,7 +24,7 @@ const GlobalStyles = createGlobalStyle`
 const Layout = styled.div``
 
 const App = () => {
-  const [cardsCount, setCardsCount] = useState<number>()
+  const [cardsCount, setCardsCount] = React.useState<number>()
 
   return (
     <Layout>

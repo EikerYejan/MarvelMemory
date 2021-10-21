@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Alert /> Should render Alert 1`] = `
+<div
+  class="sc-bdnxRM bTIaev"
+  data-testid="alert"
+>
+  <button
+    class="close"
+    title="Close"
+    type="button"
+  >
+    ×
+  </button>
+  <h4>
+    Alert Title
+  </h4>
+  <p>
+    Alert Subtitle
+  </p>
+  <div
+    class="buttons"
+  >
+    <button
+      class="cancel"
+      title="Close"
+      type="button"
+    >
+      Cancel Alert
+    </button>
+    <button
+      class="confirm"
+      title="Confirm"
+      type="button"
+    >
+      Confirm Button
+    </button>
+  </div>
+</div>
+`;

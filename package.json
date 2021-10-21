@@ -50,6 +50,10 @@
     ]
   },
   "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/components/**/*.{ts,tsx}",
+      "<rootDir>/src/utils/**/*.ts"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 80,

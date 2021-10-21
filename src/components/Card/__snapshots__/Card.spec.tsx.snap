@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Card /> Should render flipped card 1`] = `
+<div
+  class="sc-bdnxRM hBUBjL"
+  data-testid="card"
+  role="button"
+  tabindex="0"
+>
+  <div
+    class="inner"
+  >
+    <div
+      class="front"
+    >
+      <img
+        alt="marvel-logo"
+        src="https://i.pinimg.com/originals/24/92/00/249200c431fe811110761709b303fcaf.jpg"
+      />
+    </div>
+    <div
+      class="back"
+    >
+      <img
+        alt="Test Card"
+        src="//cdn.com/image.png"
+      />
+      <p>
+        Test Card
+      </p>
+    </div>
+  </div>
+</div>
+`;
