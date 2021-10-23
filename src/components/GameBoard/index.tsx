@@ -129,7 +129,7 @@ const verifyCards = ([card1, card2]: CardType[]) => {
   return card1.name === card2.name
 }
 
-const GameBoard = ({ cardsCount = 20, onChangeCardsCount }: Props) => {
+const GameBoard = ({ cardsCount, onChangeCardsCount }: Props) => {
   const [cards, setCards] = useState<CardType[]>([])
   const [selectedCards, setSelectedCards] = useState<CardType[]>([])
   const [matchedCards, setMatchedCards] = useState<CardType[]>()
@@ -146,7 +146,7 @@ const GameBoard = ({ cardsCount = 20, onChangeCardsCount }: Props) => {
   const matchedIds = matchedCards?.map((card) => card.id)
 
   const onSelect = (card: CardType) => {
-    if (selectedCardsCount <= 1 && !selectedIds.includes(card.id)) setSelectedCards((prev) => [...(prev ?? []), card])
+    if (selectedCardsCount <= 1 && !selectedIds.includes(card.id)) setSelectedCards((prev) => [...prev, card])
   }
 
   const pageSettings = useMemo(() => {
@@ -204,7 +204,7 @@ const GameBoard = ({ cardsCount = 20, onChangeCardsCount }: Props) => {
   }
 
   const onFinishLevel = () => {
-    setLevel((prev) => (prev ?? 0) + 1)
+    setLevel((prev) => prev + 1)
     setShowConfirmationModal(false)
   }
 
@@ -213,7 +213,7 @@ const GameBoard = ({ cardsCount = 20, onChangeCardsCount }: Props) => {
     if (hasError) return <ErrorIndicator onRetry={fetchData} />
 
     return (
-      <section>
+      <section data-testid="game-board">
         {showConfirmationModal && (
           <div className="fireworks">
             <Alert

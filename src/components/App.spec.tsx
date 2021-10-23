@@ -11,7 +11,7 @@ describe('<App />', () => {
     expect(baseElement).toBeInTheDocument()
   })
 
-  it('Should render <GameBoard />', () => {
+  it('Should render board', () => {
     jest.spyOn(React, 'useState').mockImplementationOnce(() => [4, jest.fn()])
     const { baseElement, getByTestId } = renderWithTheme(<App />)
 

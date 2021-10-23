@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios'
-import fetch from './client'
+import axios, { AxiosResponse } from 'axios'
+import { secrets } from '../../config'
 import { FetchCharactersResponse } from './types'
 
 export const fetchCharacters = async (limit = 10, offset = 0) => {
@@ -9,7 +9,14 @@ export const fetchCharacters = async (limit = 10, offset = 0) => {
       attributionText,
       data: { results },
     },
-  }: AxiosResponse<FetchCharactersResponse> = await fetch('/characters', { params: { limit, offset } })
+  }: AxiosResponse<FetchCharactersResponse> = await axios.get('/characters', {
+    baseURL: secrets.apiUrl,
+    params: {
+      limit,
+      offset,
+      apikey: secrets.apiKey,
+    },
+  })
 
   return { attributionHTML, attributionText, characters: results }
 }

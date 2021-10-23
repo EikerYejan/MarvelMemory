@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GameBoard /> Should finish game 1`] = `
+<body>
+  <div>
+    <div
+      class="sc-hKFxyN eTgajs GameBoard"
+    >
+      <section
+        data-testid="game-board"
+      >
+        <div
+          class="fireworks"
+        >
+          <div
+            class="sc-dlnjwi bUtLUq"
+            data-testid="alert"
+          >
+            <button
+              class="close"
+              title="Close"
+              type="button"
+            >
+              ×
+            </button>
+            <h4>
+              Congrats, You won!
+            </h4>
+            <p>
+              Do you want to move to the next level?
+            </p>
+            <div
+              class="buttons"
+            >
+              <button
+                class="cancel"
+                title="Close"
+                type="button"
+              >
+                Nope
+              </button>
+              <button
+                class="confirm"
+                title="Confirm"
+                type="button"
+              >
+                Hell yeah!
+              </button>
+            </div>
+          </div>
+          <div>
+            Fireworks
+          </div>
+        </div>
+        <div
+          class="sc-eCApnc JSJxT"
+        >
+          <p
+            class="cards-count"
+          >
+            0
+             cards remainig
+          </p>
+          <p
+            class="current-level"
+          >
+            Level 
+            1
+          </p>
+          <div
+            class="buttons"
+          >
+            <button
+              class="change-cards-count-button"
+              title="Change cards count"
+              type="button"
+            >
+              <img
+                alt="refresh"
+                src="images/dice.svg"
+              />
+            </button>
+            <button
+              class="reset-button"
+              title="Reset"
+              type="button"
+            >
+              <img
+                alt="refresh"
+                src="images/refresh.svg"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="grid"
+        >
+          <div
+            class="sc-bdnxRM hBUBjL"
+            data-testid="card"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="inner"
+            >
+              <div
+                class="front"
+              >
+                <img
+                  alt="marvel-logo"
+                  src="https://i.pinimg.com/originals/24/92/00/249200c431fe811110761709b303fcaf.jpg"
+                />
+              </div>
+              <div
+                class="back"
+              >
+                <img
+                  alt="Tony Stark"
+                  src="cdn.com/image/standard_xlarge.jpg"
+                />
+                <p>
+                  Tony Stark
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sc-bdnxRM hBUBjL"
+            data-testid="card"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="inner"
+            >
+              <div
+                class="front"
+              >
+                <img
+                  alt="marvel-logo"
+                  src="https://i.pinimg.com/originals/24/92/00/249200c431fe811110761709b303fcaf.jpg"
+                />
+              </div>
+              <div
+                class="back"
+              >
+                <img
+                  alt="Tony Stark"
+                  src="cdn.com/image/standard_xlarge.jpg"
+                />
+                <p>
+                  Tony Stark
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <a
+            href="https://marvel.com"
+            rel="noopener noreferrer"
+            target="_blank"
+            title="Marvel website"
+          >
+            TEXT
+          </a>
+        </footer>
+      </section>
+    </div>
+  </div>
+</body>
+`;
