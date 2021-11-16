@@ -164,7 +164,7 @@ const GameBoard = ({ cardsCount, onChangeCardsCount }: Props) => {
       setIsLoading(true)
 
       const { characters, attributionText } = await fetchCharacters(...pageSettings)
-      const processedResults = transformCharacters(replicateArray(characters))
+      const processedResults = shuffleArray(transformCharacters(replicateArray(characters)))
 
       copyrightText.current = attributionText
       setCards(processedResults)
